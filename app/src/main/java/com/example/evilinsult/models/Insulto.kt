@@ -17,7 +17,7 @@ data class Insulto(
     @SerializedName("language")
     var language: String = "",
     @SerializedName("number")
-    var number: String = "",
+    var id: String = "",
     @SerializedName("shown")
     var shown: String = "",
 

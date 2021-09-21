@@ -15,6 +15,8 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.evilinsult.models.Insulto
+import com.example.evilinsult.models.InsultoEntidad
 import com.example.evilinsult.ui.theme.EvilInsultTheme
 import com.example.evilinsult.viewmodel.InsultViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,9 +35,9 @@ class MainActivity : ComponentActivity() {
 
                 val insultoDelViewModel = viewModel.insultoMutable
 
-                Surface(color = Color.Black) {
+                Surface(color = Color.LightGray) {
 
-                    InsultScreen(insultoDelViewModel.component1().insult, viewModel)
+                    InsultScreen(insultoDelViewModel.component1().insult, viewModel, insultoDelViewModel.component1())
                 }
             }
         }
@@ -46,6 +48,7 @@ class MainActivity : ComponentActivity() {
 fun InsultScreen(
     insulto: String,
     viewModel: InsultViewModel,
+    insultoClase: Insulto? =null,
     modifier: Modifier = Modifier
 ){
 
@@ -55,8 +58,18 @@ fun InsultScreen(
         verticalArrangement = Arrangement.Center.also { Arrangement.spacedBy(20.dp) }
 
     ) {
-
         TarjetaEvil(insulto, viewModel)
+
+        Spacer(modifier.size(10.dp))
+
+        Button(onClick = {
+            if (insultoClase != null) {
+                viewModel.insert(insultoClase)
+            }
+
+        }){
+            Text("Save")
+        }
     }
 
 }

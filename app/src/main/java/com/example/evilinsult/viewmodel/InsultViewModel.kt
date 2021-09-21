@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.evilinsult.models.Insulto
+import com.example.evilinsult.models.InsultoEntidad
 import com.example.evilinsult.repository.InsultRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
@@ -13,6 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class InsultViewModel @Inject constructor (private val repository: InsultRepository) : ViewModel() {
     var insultoMutable = mutableStateOf(Insulto())
+    var listaInsulto = mutableStateOf(listOf(Insulto()))
 
     init {
         getInsult()
@@ -22,6 +24,19 @@ class InsultViewModel @Inject constructor (private val repository: InsultReposit
     fun getInsult(){
         viewModelScope.launch(IO) {
             insultoMutable.value = repository.getInsult()
+        }
+    }
+
+    fun selectAll(){
+        viewModelScope.launch {
+            //listaInsulto.value = repository.
+        }
+    }
+
+    fun insert(insulto: Insulto){
+        viewModelScope.launch {
+            val insultoAgregar = InsultoEntidad(insulto.id.toInt(), insulto.insult, insulto.language)
+            repository.insert(insultoAgregar)
         }
     }
 }
