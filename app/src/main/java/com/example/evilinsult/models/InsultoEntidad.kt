@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey
 @Entity
 data class InsultoEntidad(
     @PrimaryKey
-    val id: Int,
+    val id: Int =0,
 
-    val insulto: String,
-    val language: String,
+    val insulto: String = "",
+    val language: String= "",
 
 )

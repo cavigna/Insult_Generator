@@ -1,5 +1,6 @@
 package com.example.evilinsult.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 import com.example.evilinsult.models.InsultoEntidad
@@ -7,7 +8,7 @@ import com.example.evilinsult.models.InsultoEntidad
 @Dao
 interface InsultoDao {
 
-    @Insert (onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertInsult(insulto: InsultoEntidad)
 
     @Delete
@@ -42,4 +43,10 @@ interface LibroDao {
 
 
 }
+ */
+
+/*
+    @Query("SELECT * FROM insultoentidad")
+    suspend fun getAllInsultos():
+            LiveData<List<InsultoEntidad>>
  */

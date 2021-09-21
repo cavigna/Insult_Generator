@@ -22,7 +22,7 @@ class InsultRepository @Inject constructor(
 
     suspend fun insert(insultoEntidad: InsultoEntidad) = dao.insertInsult(insultoEntidad)
 
-    //suspend fun getAllInsults() = dao.
+    suspend fun getAllInsults() = dao.getAllInsultos()
     
 }
 

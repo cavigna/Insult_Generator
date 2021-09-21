@@ -14,10 +14,11 @@ import javax.inject.Inject
 @HiltViewModel
 class InsultViewModel @Inject constructor (private val repository: InsultRepository) : ViewModel() {
     var insultoMutable = mutableStateOf(Insulto())
-    var listaInsulto = mutableStateOf(listOf(Insulto()))
+    var listaInsulto = mutableStateOf(listOf(InsultoEntidad()))
 
     init {
         getInsult()
+        selectAll()
     }
 
 
@@ -29,7 +30,7 @@ class InsultViewModel @Inject constructor (private val repository: InsultReposit
 
     fun selectAll(){
         viewModelScope.launch {
-            //listaInsulto.value = repository.
+            listaInsulto.value = repository.getAllInsults()
         }
     }
 
