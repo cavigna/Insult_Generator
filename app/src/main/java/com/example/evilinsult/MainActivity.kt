@@ -17,6 +17,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -42,27 +43,32 @@ class MainActivity : ComponentActivity() {
                 val insultoDelViewModel = viewModel.insultoMutable
 
                 Surface(color = Color.LightGray) {
-                    NavHost(navController = navController, startDestination = "main_screen") {
-                        composable(route = "main_screen") {
-
-                            InsultScreen(
-                                insultoDelViewModel.component1().insult,
-                                viewModel,
-                                insultoDelViewModel.component1(), navController
-                            )
-                        }
-
-                        composable(route = "favoritos_screen") {
-                            FavoritsInsultScreen(
-                                viewModel = viewModel,
-                                navController = navController
-                            )
-                        }
-                    }
-
+                Navegacion(navController, viewModel)
 
                 }
             }
+        }
+    }
+}
+
+@ExperimentalMaterialApi
+@Composable
+fun Navegacion(navController: NavHostController, viewModel: InsultViewModel) {
+    val insultoDelViewModel = viewModel.insultoMutable
+    NavHost(navController = navController, startDestination = "main_screen") {
+        composable(route = "main_screen") {
+            InsultScreen(
+                insultoDelViewModel.component1().insult,
+                viewModel,
+                insultoDelViewModel.component1(), navController
+            )
+        }
+
+        composable(route = "favoritos_screen") {
+            FavoritsInsultScreen(
+                viewModel = viewModel,
+                navController = navController
+            )
         }
     }
 }
@@ -80,7 +86,10 @@ fun InsultScreen(
     Column(
         modifier.fillMaxSize().padding(30.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center.also { Arrangement.spacedBy(20.dp) }
+        verticalArrangement = Arrangement.Center.also {
+            Arrangement.spacedBy(20.dp)
+
+        }
 
     ) {
         TarjetaEvil(insulto, viewModel)
@@ -95,6 +104,8 @@ fun InsultScreen(
         }) {
             Text("Save")
         }
+
+        Spacer(modifier.size(50.dp))
 
         Button(
             onClick = {
