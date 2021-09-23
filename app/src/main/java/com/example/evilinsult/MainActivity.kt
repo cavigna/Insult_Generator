@@ -99,6 +99,8 @@ fun InsultScreen(
         Button(onClick = {
             if (insultoClase != null) {
                 viewModel.insert(insultoClase)
+
+
             }
 
         }) {
